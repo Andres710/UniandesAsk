@@ -1,0 +1,10 @@
+ul.horizontal-list li {
+  display: inline;
+}
+
+.questionContainer {
+  border: 5px solid rgb(0, 140, 255);
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+}
