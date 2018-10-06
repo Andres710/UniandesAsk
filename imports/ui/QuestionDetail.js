@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './styles/Question.css';
 
 import Navbar from './Navbar.js';
 import {Meteor} from "meteor/meteor";
 import {withTracker} from "meteor/react-meteor-data";
-import { Answers } from '../api/answers.js';
+import {Answers} from '../api/answers.js';
 
 class QuestionDetail extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
-      currentQuestion : {},
+      currentQuestion: {},
       currentUser: {}
     };
   }
@@ -43,18 +43,29 @@ class QuestionDetail extends Component {
   }
 
   mostrarRespuestas() {
-    const respuestas = this.props.answers.filter(ans => ans.question===this.state.currentQuestion._id);
-
+    let usuarioRespuesta = Meteor.user();
+    let yoEstoy = [];
+    let mostrar = false;
+    // if (usuarioRespuesta != null && this.props.answers.qualifiers!== undefined) {
+    //   yoEstoy = this.props.answers.qualifiers.filter(yo => yo === usuarioRespuesta._id);
+    //   if (yoEstoy.length === 0)
+    //     mostrar = true;
+    // }
+    const respuestas = this.props.answers.filter(ans => ans.question === this.state.currentQuestion._id);
     return respuestas.map((ans, i) => (
       <li key={i}>
         <div>
-          <button className="" onClick={this.increaseAnswerScore.bind(this, ans._id)}>
-            &#8896;
-          </button>
-          {ans.score}
-          <button className="" onClick={this.decreaseAnswerScore.bind(this, ans._id)}>
-            &#8897;
-          </button>
+          {usuarioRespuesta != null && ans.qualifiers !== undefined ?
+            ans.qualifiers.filter(yo => yo === usuarioRespuesta._id).length === 0 ?
+              <button className="" onClick={this.increaseAnswerScore.bind(this, ans._id)}>
+                &#8896;
+              </button> : '' : ''}
+          Score: {ans.score}.
+          {usuarioRespuesta != null && ans.qualifiers !== undefined ?
+            ans.qualifiers.filter(yo => yo === usuarioRespuesta._id).length === 0 ?
+              <button className="" onClick={this.decreaseAnswerScore.bind(this, ans._id)}>
+                &#8897;
+              </button> : '' : ''}
           Respuesta: {ans.text}. Publicación: {ans.username}.
         </div>
       </li>
@@ -63,16 +74,18 @@ class QuestionDetail extends Component {
 
   increaseScore(event) {
     event.preventDefault();
-    Meteor.call('questions.upScore', this.state.currentQuestion._id, (err, question)=>{
-      if (err){}
+    Meteor.call('questions.upScore', this.state.currentQuestion._id, (err, question) => {
+      if (err) {
+      }
       this.setState({currentQuestion: question});
     });
   }
 
   decreaseScore(event) {
     event.preventDefault();
-    Meteor.call('questions.downScore', this.state.currentQuestion._id,(err, question)=>{
-      if (err){}
+    Meteor.call('questions.downScore', this.state.currentQuestion._id, (err, question) => {
+      if (err) {
+      }
       this.setState({currentQuestion: question});
     });
   }
@@ -84,7 +97,7 @@ class QuestionDetail extends Component {
   decreaseAnswerScore(answer) {
     Meteor.call('answer.downScore', answer);
   }
-  
+
   render() {
     if (this !== undefined) {
       if (this.state.currentQuestion.text !== undefined) {
@@ -93,10 +106,10 @@ class QuestionDetail extends Component {
         let yoEstoy = [];
         let mostrar = false;
         if (usuarioPregunta != null) {
-            yoEstoy = califique.filter(yo => yo === usuarioPregunta._id);
-            if (yoEstoy.length === 0)
-                mostrar = true;
-          }
+          yoEstoy = califique.filter(yo => yo === usuarioPregunta._id);
+          if (yoEstoy.length === 0)
+            mostrar = true;
+        }
         let question = this.state.currentQuestion;
         return (
           <div>
@@ -118,16 +131,17 @@ class QuestionDetail extends Component {
             </ul>
             <h4>Preguntado por: {question.username}</h4>
             <div>
-              {!!usuarioPregunta?<div>
-              <h5>Responder Pregunta</h5>
-                < form className = "new-task" onSubmit={this.handleSubmit.bind(this)}>
-                <input
-                type="text"
-                ref={(textIn) => this.textIn = textIn}
-                placeholder='Type to add new answer'
-                />
+              {!!usuarioPregunta ? <div>
+                <h5>Responder Pregunta</h5>
+                < form className="new-task" onSubmit={this.handleSubmit.bind(this)}>
+                  <input
+                    type="text"
+                    ref={(textIn) => this.textIn = textIn}
+                    placeholder='Type to add new answer'
+                  />
                 </form>
-              </div>:''}
+              </div> : ''}
+              <h2>Respuestas:</h2>
               <ul>
                 {this.mostrarRespuestas()}
               </ul>
@@ -145,7 +159,7 @@ export default withTracker(() => {
   Meteor.subscribe('answers');
 
   return {
-      answers: Answers.find({}, { sort: { score: -1 } }).fetch(),
-      currentUser: Meteor.user()
-    };
+    answers: Answers.find({}, {sort: {score: -1}}).fetch(),
+    currentUser: Meteor.user()
+  };
 })(QuestionDetail);
