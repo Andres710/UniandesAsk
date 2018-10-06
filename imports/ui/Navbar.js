@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import { Meteor } from 'meteor/meteor';
 import AccountsUIWrapper from './AccountsUIWrapper.js';
 import { NavLink } from 'react-router-dom';
 
@@ -19,9 +19,9 @@ export default class Navbar extends Component {
         <a className="navbar-brand" href="/">Uniandes Ask</a>
   
         <ul className="navbar-nav">
-          <li className="nav-item">
+          {!!Meteor.user()?<li className="nav-item">
             <a className="nav-link" href="new">Crear pregunta</a>
-          </li>
+          </li>:''}
           <li className="nav-item">
             <a className="nav-link" href="#">Link 2</a>
           </li>

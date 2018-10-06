@@ -65,7 +65,7 @@ class NewQuestion extends Component {
               />
               <br/>
               <br/>
-              <button type="submit" className="btn btn-primary btn-lg btn-block">
+              <button href='/' type="submit" className="btn btn-primary btn-lg btn-block">
                 Preguntar
               </button>
               

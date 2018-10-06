@@ -74,7 +74,7 @@ class App extends Component {
 
     return (
       <div>
-        <Navbar />
+        <Navbar/>
         <br/>
         <br/>
 
