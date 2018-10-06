@@ -25,7 +25,7 @@ class NewQuestion extends Component {
       // Clear form
       ReactDOM.findDOMNode(this.refs.textQuestion).value = '';
       ReactDOM.findDOMNode(this.refs.textQuestionTags).value = '';
-      alert('Pregunta creada exitosamente!');
+
     } else{
       alert('Debes llenar todos los campos para preguntar.');
     }
@@ -65,7 +65,7 @@ class NewQuestion extends Component {
               />
               <br/>
               <br/>
-              <button href='/' type="submit" className="btn btn-primary btn-lg btn-block">
+              <button type="submit" className="btn btn-primary btn-lg btn-block">
                 Preguntar
               </button>
               
