@@ -42,24 +42,6 @@ Meteor.methods({
 
     Questions.remove(questionId);
   },
-  'questions.answer'(questionId, answer, username){
-    check(questionId, String);
-    check(answer, String);
-    check(username, String);
-
-    if(!this.userId){
-      throw new Meteor.Error('not-authorized');
-    }
-
-    Questions.update(
-      {_id:questionId},
-      {
-        $push: {
-            answers: {
-                text:answer, publisher:username}
-        }
-      });
-  },
   'questions.upScore'(questionId){
     check(questionId, String);
 
@@ -75,6 +57,9 @@ Meteor.methods({
         },
         $push: { qualifiers: this.userId }
       });
+
+    const respuesta = Questions.findOne({_id:questionId});
+    return respuesta;
   },
   'questions.downScore'(questionId){
     check(questionId, String);
@@ -89,6 +74,9 @@ Meteor.methods({
         $inc: { score: -1 },
         $push: { qualifiers: this.userId }
       });
+
+    const respuesta = Questions.findOne({_id:questionId});
+    return respuesta;
   },
 });
 
