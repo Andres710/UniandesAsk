@@ -19,15 +19,9 @@ export default class Navbar extends Component {
         <a className="navbar-brand" href="/">Uniandes Ask</a>
   
         <ul className="navbar-nav">
-          {!!Meteor.user()?<li className="nav-item">
+          {Meteor.user()?<li className="nav-item">
             <a className="nav-link" href="new">Crear pregunta</a>
           </li>:''}
-          <li className="nav-item">
-            <a className="nav-link" href="#">Link 2</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Link 3</a>
-          </li>
           <li className="nav-item">
             <AccountsUIWrapper />
           </li>
