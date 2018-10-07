@@ -5,6 +5,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import './styles/Question.css';
 
 import { Questions } from '../api/questions.js';
+import { Answers } from '../api/answers.js';
 
 import Navbar from './Navbar.js';
 import Question from './Question.js';
@@ -74,7 +75,7 @@ class App extends Component {
 
     return (
       <div>
-        <Navbar />
+        <Navbar/>
         <br/>
         <br/>
 

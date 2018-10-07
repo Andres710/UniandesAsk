@@ -26,7 +26,9 @@ Meteor.methods({
       createdAt: new Date(), // current time
       owner: this.userId,
       username: Meteor.users.findOne(this.userId).username,
-      answers: []
+      answers: [],
+      qualifiers: [],
+      score: 0
     });
   },
   'questions.remove'(questionId){
@@ -39,6 +41,42 @@ Meteor.methods({
     }
 
     Questions.remove(questionId);
+  },
+  'questions.upScore'(questionId){
+    check(questionId, String);
+
+    if(!this.userId){
+      throw new Meteor.Error('not-authorized');
+    }
+
+    Questions.update(
+      {_id:questionId},
+      {
+        $inc: {
+          score: 1
+        },
+        $push: { qualifiers: this.userId }
+      });
+
+    const respuesta = Questions.findOne({_id:questionId});
+    return respuesta;
+  },
+  'questions.downScore'(questionId){
+    check(questionId, String);
+
+    if(!this.userId){
+      throw new Meteor.Error('not-authorized');
+    }
+
+    Questions.update(
+      {_id:questionId},
+      {
+        $inc: { score: -1 },
+        $push: { qualifiers: this.userId }
+      });
+
+    const respuesta = Questions.findOne({_id:questionId});
+    return respuesta;
   },
 });
 

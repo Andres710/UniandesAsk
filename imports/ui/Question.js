@@ -1,12 +1,20 @@
-import React, { Component } from 'react';
-import { Meteor } from 'meteor/meteor';
+import React, {Component} from 'react';
+import {Meteor} from 'meteor/meteor';
 import './styles/Question.css';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-
-import { Questions } from '../api/questions.js';
+import {Questions} from '../api/questions.js';
 
 export default class Question extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      answer: ''
+    }
+  }
 
   deleteThisQuestion() {
     Meteor.call('questions.remove', this.props.question._id);
@@ -20,21 +28,25 @@ export default class Question extends Component {
   }
 
   render() {
+
     return (
       <div className="container questionContainer">
         <div className="rows">
-          <Link to={{
-            pathname: `question/${this.props.question._id}`, 
-            state: {
-              currentQuestion: this.props.question,
-            }
-          }}>
-            {this.props.question.text}
-          </Link>
+          <h1>
+            <Link to={{
+              pathname: `question/${this.props.question._id}`,
+              state: {
+                currentQuestion: this.props.question,
+                currentUser: Meteor.user()
+              }
+            }}>
+              {this.props.question.text}
+            </Link>
+          </h1>
         </div>
         <div className="rows">
           <ul className="horizontal-list">
-            <li>Tags: </li>
+            <li>Tags:</li>
             {this.renderTags()}
           </ul>
           <div className="col-md-6">
@@ -48,16 +60,6 @@ export default class Question extends Component {
       </div>
     );
   }
-
-  // render() {
-  //   return (
-  //     <li>
-  //       {this.props.question.text} by: <strong>{this.props.question.username}</strong>
-
-  //       <button className="delete" onClick={this.deleteThisQuestion.bind(this)}>
-  //         &times;
-  //       </button>
-  //     </li>
-  //   );
-  // }
 }
+
+
