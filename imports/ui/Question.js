@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Meteor} from 'meteor/meteor';
-import './styles/Question.css';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
