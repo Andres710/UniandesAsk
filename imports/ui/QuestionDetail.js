@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import './styles/Question.css';
 
 import Navbar from './Navbar.js';
-import {Meteor} from "meteor/meteor";
-import {withTracker} from "meteor/react-meteor-data";
+import {Meteor} from 'meteor/meteor';
+import {withTracker} from 'meteor/react-meteor-data';
 import {Answers} from '../api/answers.js';
 
 class QuestionDetail extends Component {
@@ -126,14 +126,14 @@ class QuestionDetail extends Component {
             </button> : ''}
             <h3>{this.state.currentQuestion.text}</h3>
             <ul className="horizontal-list">
-              <li>Tags:</li>
+              <li>Tags: </li>
               {this.state.currentQuestion.tags !== undefined ? this.renderTags() : ''}
             </ul>
             <h4>Preguntado por: {question.username}</h4>
             <div>
-              {!!usuarioPregunta ? <div>
+              {usuarioPregunta ? <div>
                 <h5>Responder Pregunta</h5>
-                < form className="new-task" onSubmit={this.handleSubmit.bind(this)}>
+                <form className="new-task" onSubmit={this.handleSubmit.bind(this)}>
                   <input
                     type="text"
                     ref={(textIn) => this.textIn = textIn}
