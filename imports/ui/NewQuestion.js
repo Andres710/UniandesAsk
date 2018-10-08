@@ -10,6 +10,14 @@ import Navbar from './Navbar.js';
 
 class NewQuestion extends Component {
 
+  constructor(props){
+    super(props);
+
+    this.state = {
+      finished: false,
+    };
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     // Find the text field via the React ref
@@ -30,7 +38,10 @@ class NewQuestion extends Component {
       ReactDOM.findDOMNode(this.refs.textQuestionTags).value = '';
       ReactDOM.findDOMNode(this.refs.textContentQuestion).value = '';
 
-      alert('Pregunta creada correctamente!');
+      //alert('Pregunta creada correctamente!');
+      this.setState({
+        finished: true,
+      });
 
     } else{
       alert('Debes llenar todos los campos para preguntar.');
@@ -41,6 +52,26 @@ class NewQuestion extends Component {
   }
 
   render() {
+    let finished = this.state.finished;
+    if(finished){
+      return (
+        <div>
+          <Navbar/>
+          <br/>
+          <br/>
+
+          <div className="container detail-container">
+            <h3>Pregunta Creada Exitosamente</h3>
+            <br/>
+            <br/>
+            <h5><a href="/">Regresar a la lista de preguntas.</a></h5>
+          </div>
+
+        </div>
+      );
+
+    }
+
     return (
       <div>
         <Navbar />
