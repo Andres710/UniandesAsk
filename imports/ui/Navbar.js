@@ -16,7 +16,7 @@ export default class Navbar extends Component {
     return (
       <nav className="navbar navbar-dark bg-dark sticky-top">
         <a className="letraBonita navbar-brand nav-link hvr-icon-grow" href="/">
-          <img id="imgBrand" className="hvr-icon" src="archive.svg" alt="brand"/>
+          <img id="imgBrand" className="hvr-icon" src="/archive.svg" alt="brand"/>
           Uniandes Ask
         </a>
         <div className="row" id="">
