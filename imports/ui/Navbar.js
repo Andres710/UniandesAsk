@@ -15,7 +15,10 @@ export default class Navbar extends Component {
   render() {
     return (
       <nav className="navbar navbar-dark bg-dark sticky-top">
-        <a className="navbar-brand nav-link hvr-underline-from-center" href="/">Uniandes Ask</a>
+        <a className="letraBonita navbar-brand nav-link hvr-icon-grow" href="/">
+          <img id="imgBrand" className="hvr-icon" src="/archive.svg" alt="brand"/>
+          Uniandes Ask
+        </a>
         <div className="row" id="">
           {!!Meteor.user() ? <div className="col nav-item">
             
