@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Navbar from './Navbar.js';
 import {Meteor} from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
+import {Link} from 'react-router-dom';
 import {Answers} from '../api/answers.js';
 
 class QuestionDetail extends Component {
@@ -11,7 +12,8 @@ class QuestionDetail extends Component {
 
     this.state = {
       currentQuestion: {},
-      currentUser: {}
+      currentUser: {},
+      deleted: false,
     };
   }
 
@@ -22,6 +24,13 @@ class QuestionDetail extends Component {
     this.setState({
       currentQuestion: currentQuestion,
       currentUser: currentUser
+    });
+  }
+
+  deleteThisQuestion() {
+    Meteor.call('questions.remove', this.state.currentQuestion._id);
+    this.setState({
+      deleted: true,
     });
   }
 
@@ -97,14 +106,41 @@ class QuestionDetail extends Component {
   }
 
   render() {
+    let deleted = this.state.deleted;
+    if(deleted){
+      return (
+        <div>
+          <Navbar/>
+          <br/>
+          <br/>
+
+          <div className="container detail-container">
+            <h3>Pregunta Eliminada Exitosamente</h3>
+            <br/>
+            <br/>
+            <h5><a href="/">Regresar a la lista de preguntas.</a></h5>
+          </div>
+
+        </div>
+      );
+
+    }
+
     if (this !== undefined) {
       if (this.state.currentQuestion.title !== undefined) {
         let califique = this.state.currentQuestion.qualifiers;
         let usuarioPregunta = Meteor.user();
+        let usernameOwner = this.state.currentQuestion.username;
         let yoEstoy = [];
         let mostrar = false;
+        let mostrarBorrar = false;
         if (usuarioPregunta != null) {
           yoEstoy = califique.filter(yo => yo === usuarioPregunta._id);
+          
+          if(usuarioPregunta.username === usernameOwner){
+            mostrarBorrar = true;
+          }
+
           if (yoEstoy.length === 0)
             mostrar = true;
         }
@@ -136,6 +172,8 @@ class QuestionDetail extends Component {
               <h4>Preguntado por: {question.username}</h4>
               <br/>
               <br/>
+              
+
               <div>
                 {usuarioPregunta ? <div>
                   <h5>Responder Pregunta</h5>
@@ -150,7 +188,8 @@ class QuestionDetail extends Component {
 
                 <br/>
                 <br/>
-
+                {mostrarBorrar ? 
+                  <button className="btn btn-danger btn-form" onClick={this.deleteThisQuestion.bind(this)}>Borrar Pregunta</button> : ''}
                 <h2>Respuestas:</h2>
                 <ul>
                   {this.mostrarRespuestas()}
@@ -169,6 +208,7 @@ class QuestionDetail extends Component {
 
 export default withTracker(() => {
   Meteor.subscribe('answers');
+  Meteor.subscribe('questions');
 
   return {
     answers: Answers.find({}, {sort: {score: -1}}).fetch(),
