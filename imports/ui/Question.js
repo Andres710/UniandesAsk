@@ -12,7 +12,7 @@ export default class Question extends Component {
 
     this.state = {
       answer: ''
-    }
+    };
   }
 
   deleteThisQuestion() {
