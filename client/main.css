@@ -215,7 +215,7 @@ h3{
 #jumboDetail{
  background: #858585;
   margin-top: -1.2rem;
-  border-radius: 1.5rem 1.5rem 0rem 0rem;
+  border-radius: 1.5rem;
   padding-bottom: 1rem;
   border-bottom: 7px solid #c1c1c1;
 }
@@ -289,9 +289,56 @@ h3{
   flex-grow: 0 !important;
 }
 
+#infoRespContainer{
+  margin-bottom: -1rem;
+  margin-top: -2rem;
+  background: #858585;
+  border-radius: 1.5rem 1.5rem 1.5rem 1.5rem;
+}
+
 .botonTag3{
   font-size: 0.7rem !important;
   margin-bottom: 1rem;
+}
+
+#jumboAgregar{
+  font-size: 2rem;
+  text-align: center;
+  font-family: 'Varela Round', sans-serif;
+  margin-top: -1.5rem;
+  padding: 0;
+  background: #858585;
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+}
+
+#h5Respuestas{
+  color: white;
+  font-family: 'Varela Round', sans-serif;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+#Puntaje{
+  color: white;
+  font-family: 'Varela Round', sans-serif;
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 1.8rem;
+}
+
+#filaSeparador{
+  margin-top: 3rem;
+}
+
+#botonEliminarFinal{
+  position: absolute;
+  margin-bottom: -1rem;
+  font-size: 2rem;
+  margin-top: -3.8rem;
+  margin-left: -2rem;
+  width: 4rem;
 }
 
 /* Hover CSS */
