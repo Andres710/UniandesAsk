@@ -46,7 +46,7 @@ export default class Question extends Component {
           <div className="questionContainer">
             <div className="row">
               <div id="iconoArchive" className="col-3">
-                <img src="archive.svg" alt="archivador" className="hvr-icon"></img>
+                <img src="archive_search.svg" alt="archivador" className="hvr-icon"></img>
               </div>
               <div className="col-3" id="scoreDiv">
                 <h5 id="h5Score">Score</h5>
