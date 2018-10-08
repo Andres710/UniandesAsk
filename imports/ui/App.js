@@ -86,9 +86,11 @@ class App extends Component {
             <br/>
               {filters}
           </div>
-          <div className="jumbotron">
-            <h2>Preguntas</h2>
-          {this.renderQuestions()}
+          <div className="jumbotron" id="jumboPreguntas">
+            <h2 id="h2Preguntas">Preguntas</h2>
+            <div className="row" id="filaPreguntas">
+                {this.renderQuestions()}
+            </div>
           </div>
         </div>
 
