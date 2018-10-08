@@ -360,3 +360,33 @@ h3{
   -webkit-transform: rotate(20deg);
   transform: rotate(20deg);
 }
+
+
+/* Form New Question */
+
+.form-container {
+  color: #EFEFEF;
+  background-color: #6d6d6d;
+  padding: 2rem 1rem;
+
+}
+
+.form-title {
+  color: white;
+}
+
+.btn-form {
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+
+/* Detail Question */
+
+.detail-container {
+  color: #EFEFEF;
+  background-color: #6d6d6d;
+  padding: 2rem 1rem;
+}
