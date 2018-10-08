@@ -33,9 +33,20 @@ class App extends Component {
 
   }
 
+  removeTagFilter(event) {
+    event.preventDefault();
+    let newFilterTags = this.state.filterTags;
+    console.log(event.target.value);
+    const deleteTag = event.target.value;
+    newFilterTags.splice(newFilterTags.indexOf(deleteTag), 1);
+    this.setState({
+      filterTags: newFilterTags
+    });
+  }
+
   renderFilterTags() {
     return this.state.filterTags.map((tag, i) => (
-      <button type="button" className="btn btn-dark col-2 botonTag" key={i}>{tag}</button>
+      <button type="button" className="btn btn-dark col-2 botonTag" key={tag} value={tag} onClick={this.removeTagFilter.bind(this)}>{tag}</button>
     ));
   }
 

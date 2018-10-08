@@ -19,7 +19,6 @@ export default class Question extends Component {
     Meteor.call('questions.remove', this.props.question._id);
   }
 
-
   renderTags() {
     return this.props.question.tags.map((tag, i) => (
       <div className="col flexiGrow">
