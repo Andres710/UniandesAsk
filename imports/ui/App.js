@@ -34,8 +34,8 @@ class App extends Component {
   }
 
   renderFilterTags() {
-    return this.state.filterTags.map((tag) => (
-      <button type="button" className="btn btn-dark col-2 botonTag" key={tag}>{tag}</button>
+    return this.state.filterTags.map((tag, i) => (
+      <button type="button" className="btn btn-dark col-2 botonTag" key={i}>{tag}</button>
     ));
   }
 
