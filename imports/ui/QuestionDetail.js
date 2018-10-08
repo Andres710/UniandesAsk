@@ -134,6 +134,8 @@ class QuestionDetail extends Component {
                 {this.state.currentQuestion.tags !== undefined ? this.renderTags() : ''}
               </ul>
               <h4>Preguntado por: {question.username}</h4>
+              <br/>
+              <br/>
               <div>
                 {usuarioPregunta ? <div>
                   <h5>Responder Pregunta</h5>
@@ -148,7 +150,7 @@ class QuestionDetail extends Component {
 
                 <br/>
                 <br/>
-                
+
                 <h2>Respuestas:</h2>
                 <ul>
                   {this.mostrarRespuestas()}
