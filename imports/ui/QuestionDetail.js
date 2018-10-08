@@ -37,8 +37,10 @@ class QuestionDetail extends Component {
   renderTags() {
     let questionTags = this.state.currentQuestion.tags;
     console.log(questionTags);
-    return questionTags.map((tag) => (
-      <li key={tag}>{tag} </li>
+    return questionTags.map((tag,i) => (
+      <div className="col" id="flexiGrow2">
+        <button type="button" className="btn btn-dark botonTag3" key={"id"+i}>{tag}</button>
+      </div>
     ));
   }
 
@@ -107,7 +109,7 @@ class QuestionDetail extends Component {
 
   render() {
     let deleted = this.state.deleted;
-    if(deleted){
+    if (deleted) {
       return (
         <div>
           <Navbar/>
@@ -136,8 +138,8 @@ class QuestionDetail extends Component {
         let mostrarBorrar = false;
         if (usuarioPregunta != null) {
           yoEstoy = califique.filter(yo => yo === usuarioPregunta._id);
-          
-          if(usuarioPregunta.username === usernameOwner){
+
+          if (usuarioPregunta.username === usernameOwner) {
             mostrarBorrar = true;
           }
 
@@ -145,58 +147,62 @@ class QuestionDetail extends Component {
             mostrar = true;
         }
         let question = this.state.currentQuestion;
+        let claseH5 ="h5ScoreDetail";
+        if (!mostrar)
+          claseH5 = "h5ScoreSolo"
         return (
           <div>
             <Navbar/>
             <br/>
-            <br/>
-
-
             <div className="container detail-container">
-
-              <div className="questionScore-container">
-                {mostrar ? <button className="" onClick={this.increaseScore.bind(this)}>
-                  &#8896;
-                </button> : ''}
-                <h5>{this.state.currentQuestion.score}</h5>
-                {mostrar ? <button className="" onClick={this.decreaseScore.bind(this)}>
-                  &#8897;
-                </button> : ''}
+              <div className="jumbotron" id="jumboDetail">
+                <h2 id="h2Detail">{this.state.currentQuestion.title}</h2>
               </div>
-
-              <h3>{this.state.currentQuestion.title}</h3>
-              <ul className="horizontal-list">
-                <li>Tags: </li>
-                {this.state.currentQuestion.tags !== undefined ? this.renderTags() : ''}
-              </ul>
-              <h4>Preguntado por: {question.username}</h4>
-              <br/>
-              <br/>
-              
-
-              <div>
-                {usuarioPregunta ? <div>
-                  <h5>Responder Pregunta</h5>
-                  <form className="new-task" onSubmit={this.handleSubmit.bind(this)}>
-                    <input
-                      type="text"
-                      ref={(textIn) => this.textIn = textIn}
-                      placeholder='Type to add new answer'
-                    />
-                  </form>
-                </div> : ''}
-
-                <br/>
-                <br/>
-                {mostrarBorrar ? 
-                  <button className="btn btn-danger btn-form" onClick={this.deleteThisQuestion.bind(this)}>Borrar Pregunta</button> : ''}
-                <h2>Respuestas:</h2>
-                <ul>
-                  {this.mostrarRespuestas()}
-                </ul>
+              <div className="container" id="infoPregContainer">
+                <div className="row">
+                  <div className="col-2" id="divScoreDetail">
+                    {mostrar ? <button className="btn" id="btnImgScoreUp" onClick={this.increaseScore.bind(this)}>
+                      <img src="/up.svg" className="imgScore" alt="up"/>
+                    </button> : ''}
+                    <h5 id={claseH5}>{this.state.currentQuestion.score}</h5>
+                    {mostrar ? <button className="btn" id="btnImgScoreDown" onClick={this.decreaseScore.bind(this)}>
+                      <img src="/down.svg" className="imgScore" alt="down"/>
+                    </button> : ''}
+                  </div>
+                  <div className="col-10" id="divTextDetail">
+                    <p className="textoDetail">{this.state.currentQuestion.content}</p>
+                    <p className="usernameDetail">Asker: {question.username}</p>
+                    <div className="row">
+                      {this.state.currentQuestion.tags !== undefined ? this.renderTags() : ''}
+                    </div>
+                  </div>
+                </div>
               </div>
-
             </div>
+            <div>
+              {usuarioPregunta ? <div>
+                <h5>Responder Pregunta</h5>
+                <form className="new-task" onSubmit={this.handleSubmit.bind(this)}>
+                  <input
+                    type="text"
+                    ref={(textIn) => this.textIn = textIn}
+                    placeholder='Type to add new answer'
+                  />
+                </form>
+              </div> : ''}
+
+              <br/>
+              <br/>
+              {mostrarBorrar ?
+                <button className="btn btn-danger btn-form" onClick={this.deleteThisQuestion.bind(this)}>Borrar
+                  Pregunta</button> : ''}
+              <h2>Respuestas:</h2>
+              <ul>
+                {this.mostrarRespuestas()}
+              </ul>
+            </div>
+
+
           </div>
         );
       }

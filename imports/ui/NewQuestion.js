@@ -53,13 +53,13 @@ class NewQuestion extends Component {
                   <h3 className="letraBonita">Realiza una pregunta</h3>
                 </div>
                 <form className="new-question" onSubmit={this.handleSubmit.bind(this)}>
-                  <label className="letraBonita">Pregunta: </label>
+                  <label className="letraBonita">Titulo: </label>
                   <br/>
                   <input
                     className="letraBonita form-control"
                     type="text"
                     ref="textQuestion"
-                    placeholder="Cuál es tu pregunta?"
+                    placeholder="Agrega un titulo llamativo a tu pregunta"
                     size="70"
                     maxLength="30"
                   />
@@ -75,7 +75,7 @@ class NewQuestion extends Component {
                   />
                   <br/>
                   <br/>
-                  <label className="letraBonita">Contenido: </label>
+                  <label className="letraBonita">Pregunta detallada: </label>
                   <br/>
                   <textarea placeholder="Redacta la pregunta que quieres realizar"
                             className="letraBonita form-control" cols="70" rows="4" ref="textContentQuestion"/>
