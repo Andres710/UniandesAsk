@@ -11,9 +11,10 @@ if(Meteor.isServer){
 }
 
 Meteor.methods({
-  'questions.insert'(text, tags){
-    check(text, String);
+  'questions.insert'(title, tags, content){
+    check(title, String);
     check(tags, [String]);
+    check(content, String);
 
 
     if(!this.userId){
@@ -21,8 +22,9 @@ Meteor.methods({
     }
 
     Questions.insert({
-      text,
+      title,
       tags,
+      content,
       createdAt: new Date(), // current time
       owner: this.userId,
       username: Meteor.users.findOne(this.userId).username,

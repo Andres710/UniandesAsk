@@ -12,7 +12,7 @@ export default class Question extends Component {
 
     this.state = {
       answer: ''
-    }
+    };
   }
 
   deleteThisQuestion() {
@@ -39,7 +39,7 @@ export default class Question extends Component {
                 currentUser: Meteor.user()
               }
             }}>
-              {this.props.question.text}
+              {this.props.question.title}
             </Link>
           </h1>
         </div>
