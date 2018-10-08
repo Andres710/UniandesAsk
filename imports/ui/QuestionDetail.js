@@ -81,7 +81,7 @@ class QuestionDetail extends Component {
           <div className="col-10" id="divTextDetail">
             <p className="textoDetail">{ans.text}</p>
             <p className="usernameDetail">Publisher: {ans.username}</p>
-            <p className="usernameDetail">Publisher: {ans.createdAt.toDateString()}</p>
+            <p className="usernameDetail">Date: {ans.createdAt.toDateString()}</p>
           </div>
         </div>
       </div>
