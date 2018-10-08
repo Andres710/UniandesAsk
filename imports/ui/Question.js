@@ -19,10 +19,11 @@ export default class Question extends Component {
     Meteor.call('questions.remove', this.props.question._id);
   }
 
-
   renderTags() {
-    return this.props.question.tags.map((tag) => (
-      <li key={tag}>{tag} </li>
+    return this.props.question.tags.map((tag, i) => (
+      <div className="col flexiGrow">
+        <button type="button" className="btn btn-dark disabled botonTag2" key={"id"+i}>{tag}</button>
+      </div>
     ));
   }
 
@@ -37,6 +38,11 @@ export default class Question extends Component {
             currentUser: Meteor.user()
           }
         }}>
+          <div id="containerTags" className="container">
+            <div className="row">
+              {this.renderTags()}
+            </div>
+          </div>
           <div className="questionContainer">
             <div className="row">
               <div id="iconoArchive" className="col-3">
@@ -47,7 +53,7 @@ export default class Question extends Component {
                 <p id="puntaje">{this.props.question.score}</p>
               </div>
               <div className="col-6 text-center">
-                <p id="textoPregunta">{this.props.question.text}</p>
+                <p id="textoPregunta">{this.props.question.title}</p>
                 <p id="usuarioFecha">{this.props.question.createdAt.toDateString()}</p>
                 <p id="usuarioPregunta">{this.props.question.username}</p>
               </div>

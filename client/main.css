@@ -39,13 +39,6 @@ h3{
   margin-right: 20px;
 }
 
-#h2Preguntas{
-  color: #4e4e4e;
-  margin-top: -2.5rem;
-  font-size: 3.8rem;
-  font-family: 'Varela Round', sans-serif;
-}
-
 .nav-link{
   width: 10rem;
   color: white;
@@ -57,6 +50,25 @@ h3{
   background-color: #6d6d6d;
   border-radius: 1rem;
   padding: 1rem;
+}
+
+.botonTag{
+  margin: 1rem;
+}
+
+.botonTag2{
+  margin-bottom: -4rem;
+}
+
+.flexiGrow{
+  flex-grow: 0 !important;
+}
+
+#h2Preguntas{
+  color: #4e4e4e;
+  margin-top: -2.5rem;
+  font-size: 3.8rem;
+  font-family: 'Varela Round', sans-serif;
 }
 
 #filtra_label{
@@ -86,10 +98,6 @@ h3{
 
 #nombrePreg:hover{
   color: white;
-}
-
-.botonTag{
-  margin: 1rem;
 }
 
 #filaPreguntas{
