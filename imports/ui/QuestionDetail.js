@@ -98,7 +98,7 @@ class QuestionDetail extends Component {
 
   render() {
     if (this !== undefined) {
-      if (this.state.currentQuestion.text !== undefined) {
+      if (this.state.currentQuestion.title !== undefined) {
         let califique = this.state.currentQuestion.qualifiers;
         let usuarioPregunta = Meteor.user();
         let yoEstoy = [];
@@ -115,34 +115,46 @@ class QuestionDetail extends Component {
             <br/>
             <br/>
 
-            {mostrar ? <button className="" onClick={this.increaseScore.bind(this)}>
-              &#8896;
-            </button> : ''}
-            <h5>{this.state.currentQuestion.score}</h5>
-            {mostrar ? <button className="" onClick={this.decreaseScore.bind(this)}>
-              &#8897;
-            </button> : ''}
-            <h3>{this.state.currentQuestion.title}</h3>
-            <ul className="horizontal-list">
-              <li>Tags: </li>
-              {this.state.currentQuestion.tags !== undefined ? this.renderTags() : ''}
-            </ul>
-            <h4>Preguntado por: {question.username}</h4>
-            <div>
-              {usuarioPregunta ? <div>
-                <h5>Responder Pregunta</h5>
-                <form className="new-task" onSubmit={this.handleSubmit.bind(this)}>
-                  <input
-                    type="text"
-                    ref={(textIn) => this.textIn = textIn}
-                    placeholder='Type to add new answer'
-                  />
-                </form>
-              </div> : ''}
-              <h2>Respuestas:</h2>
-              <ul>
-                {this.mostrarRespuestas()}
+
+            <div className="container detail-container">
+
+              <div className="questionScore-container">
+                {mostrar ? <button className="" onClick={this.increaseScore.bind(this)}>
+                  &#8896;
+                </button> : ''}
+                <h5>{this.state.currentQuestion.score}</h5>
+                {mostrar ? <button className="" onClick={this.decreaseScore.bind(this)}>
+                  &#8897;
+                </button> : ''}
+              </div>
+
+              <h3>{this.state.currentQuestion.title}</h3>
+              <ul className="horizontal-list">
+                <li>Tags: </li>
+                {this.state.currentQuestion.tags !== undefined ? this.renderTags() : ''}
               </ul>
+              <h4>Preguntado por: {question.username}</h4>
+              <div>
+                {usuarioPregunta ? <div>
+                  <h5>Responder Pregunta</h5>
+                  <form className="new-task" onSubmit={this.handleSubmit.bind(this)}>
+                    <input
+                      type="text"
+                      ref={(textIn) => this.textIn = textIn}
+                      placeholder='Type to add new answer'
+                    />
+                  </form>
+                </div> : ''}
+
+                <br/>
+                <br/>
+                
+                <h2>Respuestas:</h2>
+                <ul>
+                  {this.mostrarRespuestas()}
+                </ul>
+              </div>
+
             </div>
           </div>
         );
