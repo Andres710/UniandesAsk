@@ -12,7 +12,7 @@ export default class Question extends Component {
 
     this.state = {
       answer: ''
-    }
+    };
   }
 
   deleteThisQuestion() {
@@ -29,31 +29,33 @@ export default class Question extends Component {
   render() {
 
     return (
-      <div className="col-6">
-        <Link id="linkQuestion" className="hvr-icon-rotate" to={{
-          pathname: `question/${this.props.question._id}`,
-          state: {
-            currentQuestion: this.props.question,
-            currentUser: Meteor.user()
-          }
-        }}>
-        <div className="questionContainer">
-            <div className="row">
-              <div id="iconoArchive" className="col-3">
-                <img src="archive.svg" alt="archivador" className="hvr-icon"></img>
-              </div>
-              <div className="col-3" id="scoreDiv">
-                <h5 id="h5Score">Score</h5>
-                <p id="puntaje">{this.props.question.score}</p>
-              </div>
-              <div className="col-6 text-center">
-                <p id="textoPregunta">{this.props.question.text}</p>
-                <p id="usuarioFecha">{this.props.question.createdAt.toDateString()}</p>
-                <p id="usuarioPregunta">{this.props.question.username}</p>
-              </div>
-            </div>
+      <div className="container questionContainer">
+        <div className="rows">
+          <h1>
+            <Link to={{
+              pathname: `question/${this.props.question._id}`,
+              state: {
+                currentQuestion: this.props.question,
+                currentUser: Meteor.user()
+              }
+            }}>
+              {this.props.question.title}
+            </Link>
+          </h1>
         </div>
-        </Link>
+        <div className="rows">
+          <ul className="horizontal-list">
+            <li>Tags:</li>
+            {this.renderTags()}
+          </ul>
+          <div className="col-md-6">
+            Realizada por: {this.props.question.username}
+            <button className="delete" onClick={this.deleteThisQuestion.bind(this)}>
+              &times;
+            </button>
+          </div>
+        </div>
+
       </div>
     );
   }

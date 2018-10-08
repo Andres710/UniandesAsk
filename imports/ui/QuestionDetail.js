@@ -122,7 +122,7 @@ class QuestionDetail extends Component {
             {mostrar ? <button className="" onClick={this.decreaseScore.bind(this)}>
               &#8897;
             </button> : ''}
-            <h3>{this.state.currentQuestion.text}</h3>
+            <h3>{this.state.currentQuestion.title}</h3>
             <ul className="horizontal-list">
               <li>Tags: </li>
               {this.state.currentQuestion.tags !== undefined ? this.renderTags() : ''}

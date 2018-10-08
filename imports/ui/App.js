@@ -33,9 +33,23 @@ class App extends Component {
 
   }
 
+  removeTagFilter(event) {
+    event.preventDefault();
+
+    let newFilterTags = this.state.filterTags;
+    console.log(event.target.value);
+    const deleteTag = event.target.value;
+    newFilterTags.splice(newFilterTags.indexOf(deleteTag), 1);
+
+    this.setState({
+      filterTags: newFilterTags
+    });
+
+  }
+
   renderFilterTags() {
     return this.state.filterTags.map((tag) => (
-      <button type="button" className="btn btn-dark col-2 botonTag" key={tag}>{tag}</button>
+      <button type="button" className="btn btn-dark col-2 botonTag" key={tag} value={tag} onClick={this.removeTagFilter.bind(this)}>{tag}</button>
     ));
   }
 
@@ -62,7 +76,7 @@ class App extends Component {
     if (this.state.filterTags.length > 0) {
       filters = (
         <div className="row">
-            {this.renderFilterTags()}
+          {this.renderFilterTags()}
         </div>
       );
     }
@@ -79,18 +93,16 @@ class App extends Component {
                 </div>
                 <div className="col-8">
                   <input type="text" className="form-control form-control-lg" id="colFormLabelLg" ref="textFilterTag"
-                         placeholder="Agrega un tag"/>
+                    placeholder="Agrega un tag"/>
                 </div>
               </div>
             </form>
             <br/>
-              {filters}
+            {filters}
           </div>
-          <div className="jumbotron" id="jumboPreguntas">
-            <h2 id="h2Preguntas">Preguntas</h2>
-            <div className="row" id="filaPreguntas">
-                {this.renderQuestions()}
-            </div>
+          <div className="jumbotron">
+            <h2>Preguntas</h2>
+            {this.renderQuestions()}
           </div>
         </div>
 
