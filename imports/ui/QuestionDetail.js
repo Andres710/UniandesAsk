@@ -37,9 +37,9 @@ class QuestionDetail extends Component {
   renderTags() {
     let questionTags = this.state.currentQuestion.tags;
     console.log(questionTags);
-    return questionTags.map((tag,i) => (
+    return questionTags.map((tag, i) => (
       <div className="col" id="flexiGrow2">
-        <button type="button" className="btn btn-dark botonTag3" key={"id"+i}>{tag}</button>
+        <button type="button" className="btn btn-dark botonTag3" key={"id" + i}>{tag}</button>
       </div>
     ));
   }
@@ -60,24 +60,30 @@ class QuestionDetail extends Component {
     //   if (yoEstoy.length === 0)
     //     mostrar = true;
     // }
+    let claseH5 = "h5ScoreDetail";
     const respuestas = this.props.answers.filter(ans => ans.question === this.state.currentQuestion._id);
     return respuestas.map((ans, i) => (
-      <li key={i}>
-        <div>
-          {usuarioRespuesta != null && ans.qualifiers !== undefined ?
-            ans.qualifiers.filter(yo => yo === usuarioRespuesta._id).length === 0 ?
-              <button className="" onClick={this.increaseAnswerScore.bind(this, ans._id)}>
-                &#8896;
-              </button> : '' : ''}
-          Score: {ans.score}.
-          {usuarioRespuesta != null && ans.qualifiers !== undefined ?
-            ans.qualifiers.filter(yo => yo === usuarioRespuesta._id).length === 0 ?
-              <button className="" onClick={this.decreaseAnswerScore.bind(this, ans._id)}>
-                &#8897;
-              </button> : '' : ''}
-          Respuesta: {ans.text}. Publicación: {ans.username}.
+      <div key={ans._id} className="container" id="infoRespContainer">
+        <div className="row" id="filaSeparador">
+          <div className="col-2" id="divScoreDetail">
+            {usuarioRespuesta != null && ans.qualifiers !== undefined ?
+              ans.qualifiers.filter(yo => yo === usuarioRespuesta._id).length === 0 ?
+                <button className="btn" id="btnImgScoreUp" onClick={this.increaseAnswerScore.bind(this, ans._id)}>
+                  <img src="/up.svg" className="imgScore" alt="up"/>
+                </button> : '' : claseH5="Puntaje"}
+            <h5 id={claseH5}>{this.state.currentQuestion.score}</h5>
+            {usuarioRespuesta != null && ans.qualifiers !== undefined ?
+              ans.qualifiers.filter(yo => yo === usuarioRespuesta._id).length === 0 ?
+                <button className="btn" id="btnImgScoreDown" onClick={this.decreaseAnswerScore.bind(this, ans._id)}>
+                  <img src="/down.svg" className="imgScore" alt="down"/>
+                </button> : '' : ''}
+          </div>
+          <div className="col-10" id="divTextDetail">
+            <p className="textoDetail">{ans.text}</p>
+            <p className="usernameDetail">Publisher: {ans.username}</p>
+          </div>
         </div>
-      </li>
+      </div>
     ));
   }
 
@@ -147,7 +153,7 @@ class QuestionDetail extends Component {
             mostrar = true;
         }
         let question = this.state.currentQuestion;
-        let claseH5 ="h5ScoreDetail";
+        let claseH5 = "h5ScoreDetail";
         if (!mostrar)
           claseH5 = "h5ScoreSolo"
         return (
@@ -155,6 +161,8 @@ class QuestionDetail extends Component {
             <Navbar/>
             <br/>
             <div className="container detail-container">
+              {mostrarBorrar ?
+                <button id="botonEliminarFinal" className="btn rounded-circle btn-danger btn-form" onClick={this.deleteThisQuestion.bind(this)}>&times;</button> : ''}
               <div className="jumbotron" id="jumboDetail">
                 <h2 id="h2Detail">{this.state.currentQuestion.title}</h2>
               </div>
@@ -179,30 +187,23 @@ class QuestionDetail extends Component {
                 </div>
               </div>
             </div>
-            <div>
-              {usuarioPregunta ? <div>
-                <h5>Responder Pregunta</h5>
-                <form className="new-task" onSubmit={this.handleSubmit.bind(this)}>
-                  <input
-                    type="text"
-                    ref={(textIn) => this.textIn = textIn}
-                    placeholder='Type to add new answer'
-                  />
-                </form>
-              </div> : ''}
-
-              <br/>
-              <br/>
-              {mostrarBorrar ?
-                <button className="btn btn-danger btn-form" onClick={this.deleteThisQuestion.bind(this)}>Borrar
-                  Pregunta</button> : ''}
-              <h2>Respuestas:</h2>
-              <ul>
-                {this.mostrarRespuestas()}
-              </ul>
+            <br/>
+            <div className="container detail-container">
+              <div className="jumbotron" id="jumboDetail">
+                <h2 id="h2Detail">Respuestas</h2>
+              </div>
+              {usuarioPregunta ?
+                <div className="jumbotron" id="jumboAgregar">
+                  <h5 id="h5Respuestas">Responder Pregunta</h5>
+                  <form className="new-task" onSubmit={this.handleSubmit.bind(this)}>
+                    <input placeholder="Redacta la respuesta que le quieres dar al usuario"
+                              type="text"
+                              className="letraBonita form-control" cols="20" rows="4"
+                              ref={(textIn) => this.textIn = textIn}/>
+                  </form>
+                </div> : ''}
+              {this.mostrarRespuestas()}
             </div>
-
-
           </div>
         );
       }
