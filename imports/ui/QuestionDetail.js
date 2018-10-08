@@ -71,7 +71,7 @@ class QuestionDetail extends Component {
                 <button className="btn" id="btnImgScoreUp" onClick={this.increaseAnswerScore.bind(this, ans._id)}>
                   <img src="/up.svg" className="imgScore" alt="up"/>
                 </button> : '' : claseH5="Puntaje"}
-            <h5 id={claseH5}>{this.state.currentQuestion.score}</h5>
+            <h5 id={claseH5}>{ans.score}</h5>
             {usuarioRespuesta != null && ans.qualifiers !== undefined ?
               ans.qualifiers.filter(yo => yo === usuarioRespuesta._id).length === 0 ?
                 <button className="btn" id="btnImgScoreDown" onClick={this.decreaseAnswerScore.bind(this, ans._id)}>
@@ -81,6 +81,7 @@ class QuestionDetail extends Component {
           <div className="col-10" id="divTextDetail">
             <p className="textoDetail">{ans.text}</p>
             <p className="usernameDetail">Publisher: {ans.username}</p>
+            <p className="usernameDetail">Publisher: {ans.createdAt.toDateString()}</p>
           </div>
         </div>
       </div>
@@ -180,6 +181,7 @@ class QuestionDetail extends Component {
                   <div className="col-10" id="divTextDetail">
                     <p className="textoDetail">{this.state.currentQuestion.content}</p>
                     <p className="usernameDetail">Asker: {question.username}</p>
+                    <p className="usernameDetail">Date: {question.createdAt.toDateString()}</p>
                     <div className="row">
                       {this.state.currentQuestion.tags !== undefined ? this.renderTags() : ''}
                     </div>
