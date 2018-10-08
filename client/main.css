@@ -159,3 +159,11 @@ width: 10rem;
   text-decoration: none;
   display: inline-block;
 }
+
+/* Detail Question */
+
+.detail-container {
+  color: #EFEFEF;
+  background-color: #6d6d6d;
+  padding: 2rem 1rem;
+}
