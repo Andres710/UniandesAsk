@@ -3,8 +3,6 @@ import {Meteor} from 'meteor/meteor';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import {Questions} from '../api/questions.js';
-
 export default class Question extends Component {
 
   constructor(props) {
@@ -21,8 +19,8 @@ export default class Question extends Component {
 
   renderTags() {
     return this.props.question.tags.map((tag, i) => (
-      <div className="col flexiGrow">
-        <button type="button" className="btn btn-dark disabled botonTag2" key={"id"+i}>{tag}</button>
+      <div key={i} className="col flexiGrow">
+        <button type="button" className="btn btn-dark disabled botonTag2" >{tag}</button>
       </div>
     ));
   }
@@ -32,11 +30,7 @@ export default class Question extends Component {
     return (
       <div className="col-6">
         <Link id="linkQuestion" className="hvr-icon-rotate" to={{
-          pathname: `question/${this.props.question._id}`,
-          state: {
-            currentQuestion: this.props.question,
-            currentUser: Meteor.user()
-          }
+          pathname: `question/${this.props.question._id}`
         }}>
           <div id="containerTags" className="container">
             <div className="row">
@@ -65,3 +59,6 @@ export default class Question extends Component {
   }
 }
 
+Question.propTypes = {
+  question: PropTypes.object,
+};

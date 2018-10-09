@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 import {Questions} from '../api/questions.js';
-import {Answers} from '../api/answers.js';
+import PropTypes from 'prop-types';
 
 import Navbar from './Navbar.js';
 import Question from './Question.js';
@@ -21,7 +20,7 @@ class App extends Component {
     event.preventDefault();
 
     let newFilterTags = this.state.filterTags;
-    const newTag = ReactDOM.findDOMNode(this.refs.textFilterTag).value.trim();
+    const newTag = this.textFilterTag.value.trim();
     console.log(newTag);
     newFilterTags.push(newTag);
 
@@ -29,7 +28,7 @@ class App extends Component {
       filterTags: newFilterTags
     });
 
-    ReactDOM.findDOMNode(this.refs.textFilterTag).value = '';
+    this.textFilterTag.value = '';
 
   }
 
@@ -46,7 +45,7 @@ class App extends Component {
 
   renderFilterTags() {
     return this.state.filterTags.map((tag, i) => (
-      <button type="button" className="btn btn-dark col-2 botonTag" key={tag} value={tag} onClick={this.removeTagFilter.bind(this)}>{tag}</button>
+      <button type="button" className="btn btn-dark col-2 botonTag" key={i} value={tag} onClick={this.removeTagFilter.bind(this)}>{tag}</button>
     ));
   }
 
@@ -89,8 +88,8 @@ class App extends Component {
                   <label>Filtra por Tags:</label>
                 </div>
                 <div className="col-8">
-                  <input type="text" className="form-control form-control-lg" id="colFormLabelLg" ref="textFilterTag"
-                         placeholder="Agrega un tag"/>
+                  <input type="text" className="form-control form-control-lg" id="colFormLabelLg" ref={textFilterTag => this.textFilterTag = textFilterTag}
+                    placeholder="Agrega un tag"/>
                 </div>
               </div>
             </form>
@@ -110,11 +109,14 @@ class App extends Component {
   }
 }
 
+App.propTypes = {
+  questions: PropTypes.array.isRequired
+};
+
 export default withTracker(() => {
   Meteor.subscribe('questions');
 
   return {
     questions: Questions.find({}, {sort: {createdAt: -1}}).fetch(),
-    currentUser: Meteor.user(),
   };
 })(App);

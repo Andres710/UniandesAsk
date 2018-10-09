@@ -1,7 +1,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {check} from 'meteor/check';
-import {Questions} from "./questions";
 
 export const Answers = new Mongo.Collection('answers');
 
@@ -25,7 +24,7 @@ Meteor.methods({
       question: questionId,
       createdAt: new Date(), // current time
       owner: this.userId,
-      username: Meteor.users.findOne(this.userId).username,
+      username: Meteor.user().username,
       qualifiers: [],
       score: 0
     });

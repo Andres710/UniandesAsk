@@ -2,16 +2,11 @@ import React, {Component} from 'react';
 import {Meteor} from 'meteor/meteor';
 import AccountsUIWrapper from './AccountsUIWrapper.js';
 import {Link} from 'react-router-dom';
+import {withTracker} from 'meteor/react-meteor-data';
 
-export default class Navbar extends Component {
-  constructor(props) {
-    super(props);
+import PropTypes from 'prop-types';
 
-    this.state = {
-      onChange: props.onChange
-    };
-  }
-
+class Navbar extends Component {
   render() {
     return (
       <nav className="navbar navbar-dark bg-dark sticky-top">
@@ -20,10 +15,10 @@ export default class Navbar extends Component {
           Uniandes Ask
         </a>
         <div className="row" id="">
-          {!!Meteor.user() ? <div className="col nav-item">
+          {this.props.currentUser ? <div className="col nav-item">
             
             <Link className="nav-link hvr-underline-from-center" to="/new">Crear pregunta</Link>
-          </div> : ''}
+          </div> : null}
           <div className="col nav-item">
             <AccountsUIWrapper/>
           </div>
@@ -32,3 +27,13 @@ export default class Navbar extends Component {
     );
   }
 }
+
+Navbar.propTypes = {
+  currentUser: PropTypes.object,
+};
+
+export default withTracker(() => {
+  return {
+    currentUser: Meteor.user(),
+  };
+})(Navbar);
