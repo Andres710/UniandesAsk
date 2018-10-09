@@ -25,6 +25,7 @@ export default class Navbar extends Component {
             <Link className="nav-link hvr-underline-from-center" to="/new">Crear pregunta</Link>
           </div> : ''}
           <div className="col nav-item">
+      // Este accountUIWrapper esta mal colocado porque cuando sale la pagina, hay que scroll hacia la derecha para ver toda la información de usuario
             <AccountsUIWrapper/>
           </div>
         </div>
