@@ -170,6 +170,7 @@ class QuestionDetail extends Component {
               <div className="container" id="infoPregContainer">
                 <div className="row">
                   <div className="col-2" id="divScoreDetail">
+                    //El usuario que crea una pregunta puede poner up a la respuesta. Mejor manejar excepción
                     {mostrar ? <button className="btn" id="btnImgScoreUp" onClick={this.increaseScore.bind(this)}>
                       <img src="/up.svg" className="imgScore" alt="up"/>
                     </button> : ''}
