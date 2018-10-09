@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
-import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import {Questions} from '../api/questions.js';
 
 import Navbar from './Navbar.js';
 
@@ -21,22 +19,22 @@ class NewQuestion extends Component {
   handleSubmit(event) {
     event.preventDefault();
     // Find the text field via the React ref
-    const title = ReactDOM.findDOMNode(this.refs.textQuestion).value.trim();
+    const title = this.textQuestion.value.trim();
     console.log(title);
 
-    const stringTags = ReactDOM.findDOMNode(this.refs.textQuestionTags).value.trim();
+    const stringTags = this.textQuestionTags.value.trim();
     const tags = stringTags.split(' ');
 
-    const content = ReactDOM.findDOMNode(this.refs.textContentQuestion).value.trim();
+    const content = this.textContentQuestion.value.trim();
     console.log(content);
 
     if (title !== '' && tags.length > 0) {
       Meteor.call('questions.insert', title, tags, content);
 
       // Clear form
-      ReactDOM.findDOMNode(this.refs.textQuestion).value = '';
-      ReactDOM.findDOMNode(this.refs.textQuestionTags).value = '';
-      ReactDOM.findDOMNode(this.refs.textContentQuestion).value = '';
+      this.textQuestion.value = '';
+      this.textQuestionTags.value = '';
+      this.textContentQuestion.value = '';
 
       //alert('Pregunta creada correctamente!');
       this.setState({
@@ -89,7 +87,7 @@ class NewQuestion extends Component {
                   <input
                     className="letraBonita form-control"
                     type="text"
-                    ref="textQuestion"
+                    ref={textQuestion => this.textQuestion = textQuestion}
                     placeholder="Agrega un titulo llamativo a tu pregunta"
                     size="70"
                     maxLength="30"
@@ -100,7 +98,7 @@ class NewQuestion extends Component {
                   <input
                     className="form-control"
                     type="text"
-                    ref="textQuestionTags"
+                    ref={textQuestionTags => this.textQuestionTags = textQuestionTags}
                     placeholder="e.g. (campus cálculo admisiones)"
                     size="70"
                   />
@@ -109,7 +107,7 @@ class NewQuestion extends Component {
                   <label className="letraBonita">Pregunta detallada: </label>
                   <br/>
                   <textarea placeholder="Redacta la pregunta que quieres realizar"
-                            className="letraBonita form-control" cols="70" rows="4" ref="textContentQuestion"/>
+                    className="letraBonita form-control" cols="70" rows="4" ref={textContentQuestion => this.textContentQuestion = textContentQuestion}/>
                   <br/>
                   <br/>
                   <button type="submit" className="letraBonita btn btn-light btn-form">
@@ -121,12 +119,16 @@ class NewQuestion extends Component {
                 <img src="phraseImg.png" alt="imagen" id="imgNew"/>
               </div>
             </div>
-          </div> : ''
+          </div> : null
         }
       </div>
     );
   }
 }
+
+NewQuestion.propTypes = {
+  currentUser: PropTypes.object,
+};
 
 export default withTracker(() => {
   Meteor.subscribe('questions');

@@ -5,7 +5,6 @@ import { render } from 'react-dom';
 import './main.html';
 
 import '../imports/startup/accounts-config.js';
-import App from '../imports/ui/App.js';
 import { AppRoutes } from '../imports/routes.js';
 
 // Meteor.startup(() => {

@@ -27,7 +27,7 @@ Meteor.methods({
       content,
       createdAt: new Date(), // current time
       owner: this.userId,
-      username: Meteor.users.findOne(this.userId).username,
+      username: Meteor.user().username,
       answers: [],
       qualifiers: [],
       score: 0
