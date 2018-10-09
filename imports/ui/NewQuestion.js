@@ -24,6 +24,7 @@ class NewQuestion extends Component {
     const title = ReactDOM.findDOMNode(this.refs.textQuestion).value.trim();
     console.log(title);
 
+    //Es bueno de pronto tener unas categorias default para restringir el espacio de respuesta  a uno discreto. Asi se puede buscar por 
     const stringTags = ReactDOM.findDOMNode(this.refs.textQuestionTags).value.trim();
     const tags = stringTags.split(' ');
 
