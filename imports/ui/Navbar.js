@@ -20,11 +20,11 @@ export default class Navbar extends Component {
           Uniandes Ask
         </a>
         <div className="row" id="">
-          {!!Meteor.user() ? <div className="col nav-item">
+          {!!Meteor.user() ? <div className="col nav-item navbar-tab">
             
             <Link className="nav-link hvr-underline-from-center" to="/new">Crear pregunta</Link>
           </div> : ''}
-          <div className="col nav-item">
+          <div className="col nav-item navbar-tab">
             <AccountsUIWrapper/>
           </div>
         </div>

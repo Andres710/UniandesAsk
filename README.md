@@ -1,6 +1,6 @@
 # UniandesAsk
 
-The purposo of this prpject was to create a web application for submitting questions and answers related to Universidad de los Andes. Each user can publish his questions and wait for the anwers of the community. 
+The purpose of this project was to create a web application for submitting questions and answers related to Universidad de los Andes. Each user can publish his questions and wait for the anwers of the community. 
 ## Getting Started
 To get a copy of these repository install git bash, open it from the command line and use 
 $ git clone: https://github.com/Andres710/UniandesAsk.git
